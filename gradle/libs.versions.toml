@@ -7,7 +7,7 @@ jackson-module-kotlin = "2.18.2"
 libsu = "5.2.2"
 
 #proyecto
-extenre-patcher = "20.0.1.RE"
+extenre-patcher = "20.0.0.dev-21-RE"
 jadb = "1.2.1.2.RE"
 
 #Agregador
