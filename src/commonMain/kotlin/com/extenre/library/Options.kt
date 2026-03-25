@@ -76,7 +76,7 @@ object Options {
                                 option.default
                             }
 
-                        Patch.Option(option.name, optionValue)   // si la propiedad se llama 'name'
+                        Patch.Option(option.key, optionValue)
                     },
                 )
             }

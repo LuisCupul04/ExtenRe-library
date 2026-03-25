@@ -8,10 +8,10 @@
 
 package com.extenre.library
 
-import com.extenre.patcher.patch.stringOption
 import com.extenre.patcher.patch.booleanOption
-import com.extenre.patcher.patch.floatsOption
 import com.extenre.patcher.patch.bytecodePatch
+import com.extenre.patcher.patch.floatsOption
+import com.extenre.patcher.patch.stringOption
 import kotlinx.serialization.json.*
 import java.io.ByteArrayOutputStream
 import kotlin.test.Test
@@ -24,9 +24,9 @@ class SerializationTest {
 
         dependsOn(bytecodePatch(), bytecodePatch())
 
-        stringOption("key1", null, null, "description1")
-        booleanOption("key2", true, null, "description2")
-        floatsOption("key3", listOf(1.0f), mapOf("list" to listOf(1f)), "description3")
+        stringOption("key1", null, null, "title1", "description1")
+        booleanOption("key2", true, null, "title2", "description2")
+        floatsOption("key3", listOf(1.0f), mapOf("list" to listOf(1f)), "title3", "description3")
     }
 
     private var patches = setOf(testPatch)
@@ -37,6 +37,7 @@ class SerializationTest {
         val deserializedJson = Json.parseToJsonElement(serializedJson)
 
         // Test patch serialization.
+
         assertIs<JsonArray>(deserializedJson)
 
         val deserializedPatch = deserializedJson[0].jsonObject
@@ -52,11 +53,12 @@ class SerializationTest {
         }
 
         // Test option serialization.
+
         val options = deserializedPatch["options"]!!.jsonArray
 
         assert(options.size == 3) { "The patch should have three options." }
 
-        assert(options[0].jsonObject["title"]!!.jsonPrimitive.content == "description1")
+        assert(options[0].jsonObject["title"]!!.jsonPrimitive.content == "title1")
         assert(options[0].jsonObject["default"]!!.jsonPrimitive.contentOrNull == null)
         assert(options[1].jsonObject["default"]!!.jsonPrimitive.boolean)
         assert(options[2].jsonObject["values"]!!.jsonObject["list"]!!.jsonArray[0].jsonPrimitive.float == 1f)

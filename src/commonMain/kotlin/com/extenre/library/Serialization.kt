@@ -95,8 +95,8 @@ private class PatchSerializer : KSerializer<Patch<*>> {
         @OptIn(ExperimentalSerializationApi::class)
         override fun serialize(encoder: Encoder, value: Option<*>) {
             encoder.encodeStructure(descriptor) {
-                encodeStringElement(descriptor, 0, value.name)                // antes key
-                encodeNullableSerializableElement(descriptor, 1, String.serializer(), value.description) // antes title
+                encodeStringElement(descriptor, 0, value.key)
+                encodeNullableSerializableElement(descriptor, 1, String.serializer(), value.title)
                 encodeNullableSerializableElement(descriptor, 2, String.serializer(), value.description)
                 encodeBooleanElement(descriptor, 3, value.required)
                 encodeSerializableElement(descriptor, 4, String.serializer(), value.type.toString())
