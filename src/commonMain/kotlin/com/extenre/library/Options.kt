@@ -58,6 +58,7 @@ object Options {
      * @param prettyPrint Whether to pretty print the JSON.
      * @return The JSON string containing the options.
      */
+     @Suppress("DEPRECATION")
     fun serialize(
         patches: Set<com.extenre.patcher.patch.Patch<*>>,
         prettyPrint: Boolean = false,

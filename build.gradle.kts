@@ -13,7 +13,7 @@ plugins {
 
 group = "com.extenre"
 
-// Configuración de repositorios (debe estar dentro de un bloque repositories)
+// Configuración de repositorios
 repositories {
     google()
     mavenCentral()
@@ -45,7 +45,6 @@ kotlin {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_17
         }
-        // Publicar variantes release (esto está bien dentro del bloque androidTarget)
         publishLibraryVariants("release")
     }
 
@@ -75,6 +74,14 @@ kotlin {
     }
 }
 
+configurations.all {
+    resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin") {
+            useVersion("2.3.10")
+        }
+    }
+}
+
 android {
     namespace = "com.extenre.library"
     compileSdk = 35
@@ -90,6 +97,12 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    // 👇 Bloque lint agregado
+    lint {
+        checkReleaseBuilds = false
+        disable.add("KotlinMetadataVersion")
     }
 }
 

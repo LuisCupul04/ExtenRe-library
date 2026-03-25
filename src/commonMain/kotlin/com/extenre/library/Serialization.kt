@@ -91,8 +91,9 @@ private class PatchSerializer : KSerializer<Patch<*>> {
         }
 
         override fun deserialize(decoder: Decoder) = throw NotImplementedError("Deserialization is unsupported")
-
+        
         @OptIn(ExperimentalSerializationApi::class)
+        @Suppress("DEPRECATION")
         override fun serialize(encoder: Encoder, value: Option<*>) {
             encoder.encodeStructure(descriptor) {
                 encodeStringElement(descriptor, 0, value.key)

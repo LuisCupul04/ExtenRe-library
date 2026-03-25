@@ -186,6 +186,7 @@ object ApkSigner {
      * @see PrivateKeyCertificatePair
      * @see Signer
      */
+    @Suppress("DEPRECATION")
     fun newApkSigner(
         signer: String,
         privateKeyCertificatePair: PrivateKeyCertificatePair,
